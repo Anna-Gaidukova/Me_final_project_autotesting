@@ -116,10 +116,17 @@ class MainPage(base_page.BasePage):
         print(f"{inspect.currentframe().f_code.co_name} - OK")
 
     def is_sub_cat_children_books_seen(self):
+        assert self.hover_action(*locators.MainPageLocators.CATEGORY_CHILDREN_BOOKS), \
+            "The element is not present"
         assert self.click_element(*locators.MainPageLocators.CATEGORY), \
-            "The element is not present or intractable"
+            "The element is not present"
+        self.explicit_wait(2)
+        assert self.hover_action(*locators.MainPageLocators.CATEGORY_CHILDREN_BOOKS), \
+            "The element is not present"
+        self.explicit_wait(5)
         assert self.is_element_present(*locators.MainPageLocators.SUB_CAT_CHILDREN_BOOKS), \
             "The element is not present"
+        self.click_element(*locators.MainPageLocators.CATEGORY)
         print(f"{inspect.currentframe().f_code.co_name} - OK")
 
     def is_info_block_recommended_seen(self):
@@ -221,8 +228,8 @@ class MainPage(base_page.BasePage):
             "The element subscribe is not present"
         print(f"{inspect.currentframe().f_code.co_name} - OK")
 
-    def is_conntacts_seen(self):
-        assert self.is_element_present(*locators.BasePageLocators.CONNTACTS), \
+    def is_contacts_seen(self):
+        assert self.is_element_present(*locators.BasePageLocators.CONTACTS), \
             "The element subscribe is not present"
         print(f"{inspect.currentframe().f_code.co_name} - OK")
 

@@ -90,6 +90,18 @@ class BasePage:
             return None
         return text
 
+    def scroll_page(self, scrl):  # разовий скрол на потрібний рядок сторінки (в пікселях)
+        self.browser.execute_script("window.scrollTo(0," + str(scrl) + ")")
+
+    def qty_of_elements(self, how, what):  # повертає кількість елементів за однаковим локатором
+        try:
+            qty = len(self.browser.find_elements(how, what))
+        except NoSuchElementException:
+            return False
+        return qty
+
+
+
     def login_to_cabinet(self, user_name, user_password):
         pass
 
