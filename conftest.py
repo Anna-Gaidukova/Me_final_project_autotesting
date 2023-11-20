@@ -14,7 +14,7 @@ def pytest_addoption(parser):
                      help="Choose browser: chrome or firefox")
 
 
-@pytest.fixture()
+@pytest.fixture(scope="class")
 def browser(request):
     browser_mode = request.config.getoption("browser_mode")
     browser_name = request.config.getoption("browser_name")
@@ -34,8 +34,8 @@ def browser(request):
         browser = webdriver.Chrome(options=opts_chrome)
     elif browser_name == "firefox":
         print(f"\n start {browser_name} browser for test..")
-        opts_firefox.add_argument("--width=500")
-        opts_firefox.add_argument("--height=1440")
+        opts_firefox.add_argument("--width=1920")
+        opts_firefox.add_argument("--height=1080")
         browser = webdriver.Firefox(options=opts_firefox)
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
